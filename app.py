@@ -9,7 +9,9 @@ CORS(app, support_credentials=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:root@localhost/postgres"
 db = SQLAlchemy(app)
 
-
+"""
+Entity representation for bezirksgrenzen table 
+"""
 class Bezirksgrenzen(db.Model):
   __tablename__ = 'bezirksgrenzen'
   gml_id = db.Column(db.Integer, primary_key=True)
@@ -26,6 +28,9 @@ class Bezirksgrenzen(db.Model):
      self.land_schluessel = land_schluessel
      self.schluessel_gesamt = schluessel_gesamt
 
+"""
+Entity representation for lor_planungs_raeume_2021 table 
+"""
 class LorPlanungsRaeume_2021(db.Model):
   __tablename__ = 'lor_planungs_raeume_2021'
   plr_id = db.Column(db.Integer, primary_key=True)
@@ -47,6 +52,9 @@ class LorPlanungsRaeume_2021(db.Model):
      self.stand = stand
      self.grÖsse_m2 = grÖsse_m2
 
+"""
+Entity representration for fahrraddiebstahl table 
+"""
 class Fahrraddiebstahl(db.Model):
   __tablename__ = 'fahrraddiebstahl'
   fahrraddiebstahl_id  = db.Column(db.Integer, primary_key=True)
