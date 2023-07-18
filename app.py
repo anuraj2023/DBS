@@ -3,25 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-#CORS(app, support_credentials=True)
-
-# cors = CORS(app, resources={r"/*": {"origins": "http://localhost:8081"}})
 
 CORS(app, support_credentials=True)
-
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:root@localhost/postgres"
 db = SQLAlchemy(app)
 
-# class Item(db.Model):
-#   id = db.Column(db.Integer, primary_key=True)
-#   title = db.Column(db.String(80), unique=True, nullable=False)
-#   content = db.Column(db.String(120), unique=True, nullable=False)
-
-#   def __init__(self, id, title, content):
-#     self.id = id
-#     self.title = title
-#     self.content = content
 
 class Bezirksgrenzen(db.Model):
   __tablename__ = 'bezirksgrenzen'
@@ -245,42 +232,6 @@ def delete_lorPlanungsRaeume2021(plr_id):
   db.session.query(LorPlanungsRaeume_2021).filter_by(plr_id=plr_id).delete()
   db.session.commit()
   return "item deleted"
-
-
-# @app.route('/items/<id>', methods=['GET'])
-# def get_item(id):
-#   item = Item.query.get(id)
-#   del item.__dict__['_sa_instance_state']
-#   return jsonify(item.__dict__)
-
-# @app.route('/items', methods=['GET'])
-# def get_items():
-#   items = []
-#   for item in db.session.query(Item).all():
-#     del item.__dict__['_sa_instance_state']
-#     items.append(item.__dict__)
-#   return jsonify(items)
-
-# @app.route('/items', methods=['POST'])
-# def create_item():
-#   body = request.get_json()
-#   db.session.add(Item(1, body['title'], body['content']))
-#   db.session.commit()
-#   return "item created"
-
-# @app.route('/items/<id>', methods=['PUT'])
-# def update_item(id):
-#   body = request.get_json()
-#   db.session.query(Item).filter_by(id=id).update(
-#     dict(title=body['title'], content=body['content']))
-#   db.session.commit()
-#   return "item updated"
-
-# @app.route('/items/<id>', methods=['DELETE'])
-# def delete_item(id):
-#   db.session.query(Item).filter_by(id=id).delete()
-#   db.session.commit()
-#   return "item deleted"
 
 if __name__ == '__main__':
     app.run(debug=True)
